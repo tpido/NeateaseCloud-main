@@ -1,7 +1,7 @@
 <template>
   <div id="recmanplaylist">
     <div class="recmanplaylist_item" v-for="item in playlist" :key="item.id">
-      <a class="mask"></a>
+      <a :href="'#/playlist/' + item.id" class="mask"></a>
       <img :src="item.picUrl" />
       <div class="bottom">
         <p>
@@ -56,8 +56,8 @@ export default {
 
 .mask {
   position: absolute;
-  width: 149px;
-  height: 149px;
+  width: 153px;
+  height: 153px;
   background-color: rgba(0, 0, 0, 0.2);
   z-index: 200;
 }

@@ -22,9 +22,18 @@
       >
         <!-- 顶部区域 -->
         <div class="top">
-          <img :src="Toplistimg[index]" />
+          <!-- 图片区域 -->
+          <div class="toplistImg">
+            <a href="" :title="ToplistName[index]" class="mask"></a>
+            <img :src="Toplistimg[index]" />
+          </div>
+          <!-- 文字区域 -->
           <div class="info">
-            <p>{{ ToplistName[index] }}</p>
+            <!-- 榜单名字 -->
+            <a href="" :title="ToplistName[index]" class="toplistName">
+              {{ ToplistName[index] }}
+            </a>
+
             <a href="" title="播放" class="play"></a>
             <a href="" title="收藏" class="collect"></a>
           </div>
@@ -181,6 +190,28 @@ export default {
   display: flex;
 }
 
+.toplistImg {
+  position: relative;
+}
+
+.top .mask {
+  position: absolute;
+  top: 0;
+  background: url("@/assets/coverall.png");
+  width: 80px;
+  height: 80px;
+  background-position: -145px -57px;
+}
+
+.top .toplistName {
+  text-decoration: none;
+  color: black;
+}
+
+.toplistName:hover {
+  text-decoration: underline;
+}
+
 .top img {
   margin-right: 7px;
   display: block;
@@ -188,9 +219,9 @@ export default {
   width: 80px;
 }
 
-.top p {
+.top a {
   font-weight: 600;
-  margin-top: 5px;
+  /* margin-top: 5px; */
   font-size: 14px;
 }
 
@@ -201,6 +232,7 @@ export default {
 .play {
   position: absolute;
   top: 27px;
+  left: 0;
   background: url("@/assets/index.png");
   width: 22px;
   height: 22px;
@@ -217,7 +249,7 @@ export default {
 .collect {
   position: absolute;
   top: 29px;
-  left: 30px;
+  left: 33px;
   background: url("@/assets/index.png");
   width: 20px;
   height: 19px;

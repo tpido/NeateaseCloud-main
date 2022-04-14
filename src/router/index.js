@@ -9,6 +9,11 @@ const routes = [
         path: "/",
         redirect: "/findmusic"
     },
+
+    {
+        path: "/playlist/:id",
+        component: () => import("../components/common/playlist/playlist.vue")
+    },
     {
         path: "/findmusic",
         component: () => import("../views/Findmusic/findMusic.vue")

@@ -10,6 +10,7 @@
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
     "element-ui": "^2.15.6",
+    "moment": "^2.29.2",
     "swiper": "^3.4.2",
     "vue": "^2.6.14",
     "vue-awesome-swiper": "^3.1.3",
