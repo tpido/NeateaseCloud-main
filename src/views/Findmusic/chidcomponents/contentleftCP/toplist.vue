@@ -242,7 +242,7 @@ export default {
   height: 32px;
   line-height: 32px;
   font-size: 12px;
-  padding-left: 35px;
+  padding-left: 25px;
   /* width: 100%; */
   list-style: none;
 }
