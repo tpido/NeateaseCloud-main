@@ -1,31 +1,18 @@
 <template>
   <div id="findmusic">
     <!-- 头部区域 -->
-      <home-headers></home-headers>
-      <div class="content_banner">
-        <cascade></cascade>
-      </div>
-      
-      <div class="content">
-        <content-left></content-left>
-        <content-right></content-right>
-      </div>
-    </div>
+    <home-headers></home-headers>
+    <!-- 内容区域 -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
-import Cascade from "./chidcomponents/cascade.vue";
-import contentLeft from "./chidcomponents/contentLeft.vue";
-import contentRight from "./chidcomponents/contentright.vue";
-import homeHeaders from "./chidcomponents/homeheaders.vue";
+import homeHeaders from "./chidcomponents/homeheaders/homeheaders.vue";
 export default {
   name: "findMusic",
   components: {
     homeHeaders,
-    Cascade,
-    contentLeft,
-    contentRight,
   },
 };
 </script>

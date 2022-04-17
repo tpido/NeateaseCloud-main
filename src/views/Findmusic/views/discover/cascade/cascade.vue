@@ -16,16 +16,20 @@ export default {
       bannerList: [],
     };
   },
-  async created() {
-    const { data: res } = await this.$http.get("/banner");
-    this.bannerList = res.banners;
-    console.log(this.bannerList);
+  created() {
+    this.getbannerlist();
+  },
+
+  methods: {
+    async getbannerlist() {
+      const { data: res } = await this.$http.get("/banner");
+      this.bannerList = res.banners;
+    },
   },
 };
 </script>
 <style scoped>
 img {
-  /* height: 900px; */
   width: 100%;
 }
 </style>

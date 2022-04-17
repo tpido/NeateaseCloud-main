@@ -8,10 +8,10 @@
 </template>
 
 <script>
-import hotRecommend from "./contentleftCP/hotrecommend.vue";
-import recmanPlaylist from "./contentleftCP/recmanplaylist.vue";
-import newDisk from "./contentleftCP/newdisk.vue";
-import topList from "./contentleftCP/toplist.vue";
+import hotRecommend from "./childcomponents/hotrecommend.vue";
+import recmanPlaylist from "./childcomponents/recmanplaylist.vue";
+import newDisk from "./childcomponents/newdisk.vue";
+import topList from "./childcomponents/toplist.vue";
 export default {
   name: "",
   components: {

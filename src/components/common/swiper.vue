@@ -1,6 +1,6 @@
 <template>
   <div id="swiper">
-    <swiper ref="mySwiper" :options="swiperOptions" autoplay class="swiper">
+    <swiper ref="mySwiper" :options="swiperOptions" class="swiper">
       <slot></slot>
       <div class="swiper-button-prev" slot="button-prev"></div>
       <div class="swiper-button-next" slot="button-next"></div>
@@ -24,8 +24,6 @@ export default {
         speed: 1000, // 轮播速度
         slidesPerView: 5,
         spaceBetween: 30,
-        // nextButton: ".111",
-        // prevButton: "",
         pagination: {
           el: ".swiper-pagination",
         },

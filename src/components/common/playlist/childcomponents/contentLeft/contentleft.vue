@@ -21,17 +21,58 @@
             <span class="createTime">{{ changecreateTime }}创建</span>
           </div>
 
-          <!-- 按钮区域 -->
+          <!-- 按钮区域(之后再做) -->
           <div class="button"></div>
+
+          <!-- 标签区域 -->
+          <div class="tag">
+            <span>标签:</span>
+            <span v-for="item in playlist.tags" class="tags_item">
+              {{ item }}</span
+            >
+          </div>
+
+          <!-- 介绍区域 -->
+          <div class="introduction">
+            <!-- 省略内容 -->
+            <div class="descLess" v-if="isMore === false">
+              <b>介绍: </b>
+              <span v-html="playlist.descless"></span>
+              <div class="pulling">
+                <a @click="isMore = true">更多</a>
+                <img src="@/assets/img/down.svg" alt="" />
+              </div>
+            </div>
+
+            <!-- 详细内容 -->
+            <div class="descMore" v-if="isMore === true">
+              <b>介绍: </b>
+              <span v-html="playlist.descMore"></span>
+              <div class="pulling">
+                <a @click="isMore = false">收起</a>
+                <img src="@/assets/img/up.svg" alt="" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <!-- 歌曲列表区域 -->
+      <songs-list :playlist="playlist" :songsDetail="songsDetail"></songs-list>
+      <!-- 评论区域 -->
+      <comment></comment>
     </div>
   </div>
 </template>
 
 <script>
+import comment from "./childcomponents/comment.vue";
+import songsList from "./childcomponents/songslist.vue";
 export default {
   name: "contentleft",
+  components: {
+    songsList,
+    comment,
+  },
   props: {
     playlist: {
       type: Object,
@@ -39,6 +80,19 @@ export default {
         return {};
       },
     },
+
+    songsDetail: {
+      type: Array,
+      default() {
+        return [];
+      },
+    },
+  },
+
+  data() {
+    return {
+      isMore: false,
+    };
   },
 
   computed: {
@@ -50,14 +104,12 @@ export default {
 </script>
 <style scoped>
 #contentleft {
-  /* background-color: blue; */
   border-right: 2px solid #e3e3e3;
   height: 100%;
   width: 710px;
 }
 
 .content {
-  display: flex;
   padding: 47px 30px 40px 39px;
 }
 
@@ -131,5 +183,59 @@ export default {
   font-size: 12px;
   color: #999;
   margin-left: 5px;
+}
+
+.tag {
+  margin-top: 25px;
+  font-size: 12px;
+  color: #666666;
+}
+
+.tags_item {
+  border: 1px solid #d1d1d1;
+  background-color: #f7f7f7;
+  margin: 0 10px;
+  padding: 2px 10px;
+  border-radius: 10px;
+}
+
+.introduction {
+  margin-top: 8px;
+}
+
+.introduction b {
+  font-size: 12px;
+}
+
+.introduction span {
+  width: 408px;
+  font-size: 12px;
+}
+
+.introduction a {
+  font-size: 12px;
+  color: black;
+  text-decoration: none;
+}
+
+.introduction a:hover {
+  text-decoration: underline;
+}
+
+.pulling {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.pulling img {
+  height: 15.5px;
+}
+
+.descLess {
+  width: 408px;
+}
+
+.descMore {
+  width: 408px;
 }
 </style>

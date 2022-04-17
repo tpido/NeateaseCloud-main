@@ -29,7 +29,6 @@ export default {
 
 .left {
   display: flex;
-  width: 120px;
 }
 
 .center {
@@ -37,6 +36,6 @@ export default {
 }
 
 .right {
-  width: 50px;
+  display: flex;
 }
 </style>
