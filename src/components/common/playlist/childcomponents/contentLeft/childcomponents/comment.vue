@@ -9,7 +9,7 @@
     </sub-nav-bar>
 
     <!-- 热门评论 -->
-    <div class="hotComment" v-show="hotComments !== undefined">
+    <div class="hotComment" v-show="hotComments.length !== 0">
       <!-- 表头 -->
       <div class="title">
         <p>热门评论</p>
@@ -139,9 +139,10 @@ export default {
         },
       });
       this.commentlist = res;
-      this.hotComments = res.hotComments;
+      if (res.hotComments) this.hotComments = res.hotComments;
+      if (!res.hotComments) this.hotComments = [];
       this.newComments = res.comments;
-      console.log(this.hotComments);
+      // console.log(this.hotComments);
       // console.log(this.newComments);
       // console.log(this.commentlist);
     },

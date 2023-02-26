@@ -1,4 +1,5 @@
 <template>
+  <!-- 歌曲列表区域 -->
   <div id="songslist">
     <!-- 导航区域 -->
     <sub-nav-bar class="navBar">
@@ -29,7 +30,14 @@
         :key="index"
         :class="{ grey: index % 2 === 0 }"
       >
-        <span class="w1 add">{{ index + 1 }}</span>
+        <span class="w1 add">
+          {{ index + 1 }}
+          <span
+            class="active"
+            @click="setplay(index, item.id)"
+            :class="{ play: isActive && currentIndex === index }"
+          ></span>
+        </span>
         <span class="w2 add alias" :title="item.name">
           {{ item.name }}
           <span v-show="item.alia[0]"> {{ "-" + item.alia[0] }}</span>
@@ -52,6 +60,8 @@ export default {
     subNavBar,
   },
 
+  updated() {},
+
   props: {
     playlist: {
       type: Object,
@@ -68,6 +78,14 @@ export default {
     },
   },
 
+  data() {
+    return {
+      isActive: false,
+      //当前的下标值
+      currentIndex: -1,
+    };
+  },
+
   methods: {
     min(dt) {
       if (dt / 60000 < 10) {
@@ -81,6 +99,14 @@ export default {
       let y = parseInt(dt / 1000 - x * 60);
       if (y < 10) return "0" + y;
       else return y;
+    },
+
+    setplay(index, id) {
+      this.currentIndex = index;
+      this.$store.dispatch("setCurrentMusic", id);
+      this.$store.dispatch("addToMusicList", id);
+      if (this.isActive === true) return;
+      this.isActive = !this.isActive;
     },
   },
 };
@@ -171,7 +197,23 @@ export default {
 }
 
 .w1 {
+  display: flex;
   width: 40px;
+  position: relative;
+  /* justify-content: space-around; */
+}
+
+.active {
+  position: absolute;
+  left: 40px;
+  width: 17px;
+  height: 17px;
+  background-image: url("@/assets/iconall.png");
+  background-position: 0px -60px;
+}
+
+.play {
+  background-position: -20px -60px;
 }
 
 .w2 {

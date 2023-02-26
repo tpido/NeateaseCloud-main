@@ -4,12 +4,12 @@
       :playlist="playlistDetail.playlist"
       :songsDetail="songsDetail"
     ></content-left>
-    <content-right></content-right>
+    <content-right :subscribers="likelist"></content-right>
   </div>
 </template>
 
 <script>
-import contentRight from "./childcomponents/contentright.vue";
+import contentRight from "./childcomponents/contentRight/contentright.vue";
 import contentLeft from "./childcomponents/contentLeft/contentleft.vue";
 export default {
   name: "playlist",
@@ -24,6 +24,8 @@ export default {
       s: "",
       //歌单详情数据
       songsDetail: [],
+      //喜欢这个歌单的人
+      likelist: [],
     };
   },
   methods: {
@@ -51,6 +53,8 @@ export default {
           this.s += item.id;
         }
       });
+
+      this.likelist = this.playlistDetail.playlist.subscribers;
       this.getsongsDetailed(this.s);
       console.log(this.playlistDetail);
     },
@@ -62,7 +66,7 @@ export default {
         },
       });
       this.songsDetail = res.songs;
-      console.log(this.songsDetail);
+      // console.log(this.songsDetail);
     },
   },
   components: {

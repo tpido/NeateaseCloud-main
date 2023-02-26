@@ -2,15 +2,18 @@
   <div id="app">
     <top-bar></top-bar>
     <router-view></router-view>
+    <audio-player></audio-player>
   </div>
 </template>
 
 <script>
+import audioPlayer from "./components/common/audioplayer/audioplayer.vue";
 import topBar from "./components/common/topBar.vue";
 export default {
   name: "App",
   components: {
     topBar,
+    audioPlayer,
   },
 };
 </script>
