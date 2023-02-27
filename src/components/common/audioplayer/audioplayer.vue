@@ -7,7 +7,6 @@
   >
     <audio
       :src="currentMusicUrl"
-      autoplay
       ref="music"
       @canplay="getDuration()"
       @timeupdate="getCurrentDuration()"
@@ -122,7 +121,7 @@ export default {
   data() {
     return {
       //是否播放
-      isPlay: true,
+      isPlay: false,
       //歌曲总时长
       musicDuration: 0,
       //歌曲当前时长
@@ -135,14 +134,15 @@ export default {
       Volvalue: 50,
       //是否锁定下方音乐栏
       isUnclock: false,
-
       timer: null,
       //当前音乐数据
-      currentMusic: {},
+      currentMusic:
+        JSON.parse(window.localStorage.getItem("currentMusic")) || {},
       //当前音乐的url地址
       currentMusicUrl: "",
       //当前音乐的歌词
-      currentMusicLyric: {},
+      currentMusicLyric:
+        JSON.parse(window.localStorage.getItem("currentMusicLyric")) || {},
       //是否显示playerlist
       isDisplaylist: false,
     };
@@ -204,7 +204,10 @@ export default {
       const { data: res } = await reqLyric(id);
       // console.log(res.lrc.lyric);
       this.currentMusicLyric = new Lyric(res.lrc.lyric);
-      console.log(this.currentMusicLyric);
+      window.localStorage.setItem(
+        "currentMusicLyric",
+        JSON.stringify(this.currentMusicLyric)
+      );
     },
   },
 
@@ -231,20 +234,20 @@ export default {
       }
     },
 
-    //监听当前音乐
-    async getCurrentMusic() {
-      this.currentMusic = this.getCurrentMusic;
-      await this.getMusicUrl(this.currentMusic.id);
-      await this.getMusicLyric(this.currentMusic.id);
-      this.$refs.music.currentTime = 0;
-      this.isPlay = true;
-      //点击歌曲显示播放栏
-      this.$refs.audioplayer.style.bottom = "0px";
-      this.hiddenPlayer();
-    },
-
-    getMusicList(newval) {
-      console.log(newval);
+    getCurrentMusic: {
+      async handler() {
+        this.currentMusic = this.getCurrentMusic;
+        await this.getMusicUrl(this.currentMusic.id);
+        await this.getMusicLyric(this.currentMusic.id);
+        this.$refs.music.currentTime = 0;
+        //切换歌曲时，判断是否播放
+        if (this.isPlay === true) {
+          this.$refs.music.play();
+        }
+        //点击歌曲显示播放栏
+        this.$refs.audioplayer.style.bottom = "0px";
+      },
+      immediate: true,
     },
   },
 };
